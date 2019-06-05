@@ -11,6 +11,16 @@
 |
 */
 
+//login page
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
+Auth::routes();
+
+//pasien route
+Route::group(['prefix' => 'pasien', 'middleware' => 'auth'], function() {
+    Route::get('home', 'PasienHomeController')->name('pasien.index');
+});
+
+//admin route
